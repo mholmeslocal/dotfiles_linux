@@ -6,7 +6,7 @@
 
 # invoke global X session script
 . /etc/X11/Xsession
-terminator &
+alacritty &
 picom -f & 
 exec xmonad
 

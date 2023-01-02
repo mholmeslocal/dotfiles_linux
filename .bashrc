@@ -116,10 +116,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# set resolution
 # start xorg
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-startx 
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec startx
 fi
 
 #add nvim
@@ -133,3 +132,6 @@ export PATH=/usr/local/lib/nodejs/node-v19.3.0-linux-arm64/bin:$PATH
 #add rust
 . "$HOME/.cargo/env"
 source /home/dev/builds/alacritty/extra/completions/alacritty.bash
+
+# Starship
+eval "$(starship init bash)"
