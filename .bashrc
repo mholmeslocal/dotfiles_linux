@@ -122,3 +122,10 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
 startx 
 fi
 
+#add nvim
+export PATH=/usr/share/nvim:$PATH
+
+# nodejs
+VERSION=v19.3.0
+DISTRO=linux-arm64
+export PATH=/usr/local/lib/nodejs/node-v19.3.0-linux-arm64/bin:$PATH
