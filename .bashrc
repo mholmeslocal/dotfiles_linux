@@ -129,3 +129,7 @@ export PATH=/usr/share/nvim:$PATH
 VERSION=v19.3.0
 DISTRO=linux-arm64
 export PATH=/usr/local/lib/nodejs/node-v19.3.0-linux-arm64/bin:$PATH
+
+#add rust
+. "$HOME/.cargo/env"
+source /home/dev/builds/alacritty/extra/completions/alacritty.bash
