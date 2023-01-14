@@ -59,7 +59,7 @@ myModMask       = mod1Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["home","dev","3","4","5","6","7","8","9"]
+myWorkspaces    = ["home","dev","web","test"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -267,18 +267,18 @@ myStartupHook = do
 -- Show workspaces in xmobar
 myXmobarPP :: PP
 myXmobarPP = def
-    { ppSep             = magenta " • "
+    { ppSep             = magenta "  "
     , ppTitleSanitize   = xmobarStrip
-    , ppCurrent         = wrap "[ " " ]" . xmobarBorder "Bottom" "#8be9fd" 2
-    , ppHidden          = white . wrap " " ""
+    , ppCurrent         = s_magenta . wrap "[ " " ]" . xmobarBorder "Bottom" "#bb9af7" 2
+    , ppHidden          = s_green . wrap " " ""
     , ppHiddenNoWindows = lowWhite . wrap " " ""
     , ppUrgent          = red . wrap (yellow "!") (yellow "!")
-    , ppOrder           = \[ws, l, _, wins] -> [ws, l, wins]
+    , ppOrder           = \[ws, l, _, wins] -> [ws, wins] -- , ppOrder           = \[ws, l, _, wins] -> [ws, l, wins]
     , ppExtras          = [logTitles formatFocused formatUnfocused]
     }
   where
-    formatFocused   = wrap (white    "[") (white    "]") . magenta . ppWindow
-    formatUnfocused = wrap (lowWhite "[") (lowWhite "]") . blue    . ppWindow
+    formatFocused   = wrap (s_magenta    "<fn=1>\xf7f0 </fn>") (white    "") . s_magenta . ppWindow
+    formatUnfocused = wrap (s_lowBlue "<fn=1>\xf7f1 </fn>") (lowWhite "    ") . s_lowBlue    . ppWindow
 
     -- | Windows should have *some* title, which should not not exceed a
     -- sane length.
@@ -292,6 +292,10 @@ myXmobarPP = def
     yellow   = xmobarColor "#f1fa8c" ""
     red      = xmobarColor "#ff5555" ""
     lowWhite = xmobarColor "#bbbbbb" ""
+-- storm night colors
+    s_green  = xmobarColor "#9ece6a" ""
+    s_lowBlue  = xmobarColor "#7aa2f7" ""
+    s_magenta  = xmobarColor "#bb9af7" ""
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
 
